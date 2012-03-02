@@ -1,0 +1,136 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="aplPerfil" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{aplPerfilHome.managed ? 'Edit' : 'Add'} Apl perfil</f:facet>
+
+
+            <s:decorate id="codPerfilField" template="layout/edit.xhtml">
+                <ui:define name="label">Cod perfil</ui:define>
+                <h:inputText id="codPerfil"
+                       disabled="#{aplPerfilHome.managed}"
+                       required="true"
+                           size="20"
+                      maxlength="20"
+                          value="#{aplPerfilHome.instance.codPerfil}">
+                    <a:support event="onblur" reRender="codPerfilField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="descPerfilField" template="layout/edit.xhtml">
+                <ui:define name="label">Desc perfil</ui:define>
+                <h:inputText id="descPerfil"
+                           size="45"
+                      maxlength="45"
+                          value="#{aplPerfilHome.instance.descPerfil}">
+                    <a:support event="onblur" reRender="descPerfilField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{aplPerfilHome.persist}"
+                       disabled="#{!aplPerfilHome.wired}"
+                       rendered="#{!aplPerfilHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{aplPerfilHome.update}"
+                       rendered="#{aplPerfilHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{aplPerfilHome.remove}"
+                      immediate="true"
+                       rendered="#{aplPerfilHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/AplPerfil.xhtml"
+                rendered="#{aplPerfilHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty aplPerfilFrom ? 'AplPerfilList' : aplPerfilFrom}.xhtml"
+                rendered="#{!aplPerfilHome.managed}"/>
+
+        </div>
+    </h:form>
+
+<rich:tabPanel switchType="ajax">
+
+    <rich:tab label="Apl utils">
+        <h:form styleClass="association" id="aplUtilsChildren">
+
+            <h:outputText value="There are no aplUtils associated with this aplPerfil."
+                       rendered="#{empty aplPerfilHome.aplUtils}"/>
+
+            <rich:dataTable value="#{aplPerfilHome.aplUtils}"
+                           var="_aplUtil"
+                      rendered="#{not empty aplPerfilHome.aplUtils}"
+                    rowClasses="rvgRowOne,rvgRowTwo"
+                            id="aplUtilsTable">
+                <rich:column sortBy="#{_aplUtil.utilizador}">
+                    <f:facet name="header">Utilizador</f:facet>
+                    <h:outputText value="#{_aplUtil.utilizador}"/>
+                </rich:column>
+                <rich:column sortBy="#{_aplUtil.passwd}">
+                    <f:facet name="header">Passwd</f:facet>
+                    <h:outputText value="#{_aplUtil.passwd}"/>
+                </rich:column>
+                <rich:column sortBy="#{_aplUtil.unidOrg}">
+                    <f:facet name="header">Unid org</f:facet>
+                    <h:outputText value="#{_aplUtil.unidOrg}"/>
+                </rich:column>
+                <rich:column sortBy="#{_aplUtil.dataUltAlt}">
+                    <f:facet name="header">Data ult alt</f:facet>
+                    <h:outputText value="#{_aplUtil.dataUltAlt}">
+                        <s:convertDateTime type="both" dateStyle="short"/>
+                    </h:outputText>
+                </rich:column>
+            </rich:dataTable>
+
+        </h:form>
+
+        <f:subview rendered="#{aplPerfilHome.managed}" id="aplUtils">
+        <div class="actionButtons">
+            <s:button id="addaplUtil"
+                   value="Add aplUtil"
+                    view="/AplUtilEdit.xhtml"
+             propagation="none">
+                 <f:param name="aplPerfilCodPerfil"
+                         value="#{aplPerfilHome.instance.codPerfil}"/>
+                 <f:param name="aplUtilFrom" value="AplPerfil"/>
+            </s:button>
+        </div>
+        </f:subview>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

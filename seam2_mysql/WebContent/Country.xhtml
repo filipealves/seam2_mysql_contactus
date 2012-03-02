@@ -1,0 +1,114 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Country Details</f:facet>
+
+        <s:decorate id="code" template="layout/display.xhtml">
+            <ui:define name="label">Code</ui:define>
+            <h:outputText value="#{countryHome.instance.code}"/>
+        </s:decorate>
+
+        <s:decorate id="name" template="layout/display.xhtml">
+            <ui:define name="label">Name</ui:define>
+            <h:outputText value="#{countryHome.instance.name}"/>
+        </s:decorate>
+
+        <s:decorate id="continent" template="layout/display.xhtml">
+            <ui:define name="label">Continent</ui:define>
+            <h:outputText value="#{countryHome.instance.continent}"/>
+        </s:decorate>
+
+        <s:decorate id="region" template="layout/display.xhtml">
+            <ui:define name="label">Region</ui:define>
+            <h:outputText value="#{countryHome.instance.region}"/>
+        </s:decorate>
+
+        <s:decorate id="surfaceArea" template="layout/display.xhtml">
+            <ui:define name="label">Surface area</ui:define>
+            <h:outputText value="#{countryHome.instance.surfaceArea}"/>
+        </s:decorate>
+
+        <s:decorate id="indepYear" template="layout/display.xhtml">
+            <ui:define name="label">Indep year</ui:define>
+            <h:outputText value="#{countryHome.instance.indepYear}"/>
+        </s:decorate>
+
+        <s:decorate id="population" template="layout/display.xhtml">
+            <ui:define name="label">Population</ui:define>
+            <h:outputText value="#{countryHome.instance.population}"/>
+        </s:decorate>
+
+        <s:decorate id="lifeExpectancy" template="layout/display.xhtml">
+            <ui:define name="label">Life expectancy</ui:define>
+            <h:outputText value="#{countryHome.instance.lifeExpectancy}"/>
+        </s:decorate>
+
+        <s:decorate id="gnp" template="layout/display.xhtml">
+            <ui:define name="label">Gnp</ui:define>
+            <h:outputText value="#{countryHome.instance.gnp}"/>
+        </s:decorate>
+
+        <s:decorate id="gnpold" template="layout/display.xhtml">
+            <ui:define name="label">Gnpold</ui:define>
+            <h:outputText value="#{countryHome.instance.gnpold}"/>
+        </s:decorate>
+
+        <s:decorate id="localName" template="layout/display.xhtml">
+            <ui:define name="label">Local name</ui:define>
+            <h:outputText value="#{countryHome.instance.localName}"/>
+        </s:decorate>
+
+        <s:decorate id="governmentForm" template="layout/display.xhtml">
+            <ui:define name="label">Government form</ui:define>
+            <h:outputText value="#{countryHome.instance.governmentForm}"/>
+        </s:decorate>
+
+        <s:decorate id="headOfState" template="layout/display.xhtml">
+            <ui:define name="label">Head of state</ui:define>
+            <h:outputText value="#{countryHome.instance.headOfState}"/>
+        </s:decorate>
+
+        <s:decorate id="capital" template="layout/display.xhtml">
+            <ui:define name="label">Capital</ui:define>
+            <h:outputText value="#{countryHome.instance.capital}"/>
+        </s:decorate>
+
+        <s:decorate id="code2" template="layout/display.xhtml">
+            <ui:define name="label">Code2</ui:define>
+            <h:outputText value="#{countryHome.instance.code2}"/>
+        </s:decorate>
+
+        <s:decorate id="selected" template="layout/display.xhtml">
+            <ui:define name="label">Selected</ui:define>
+            <h:outputText value="#{countryHome.instance.selected}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/CountryEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty countryFrom ? 'CountryList' : countryFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

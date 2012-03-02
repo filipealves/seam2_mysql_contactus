@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns="http://jboss.com/products/seam/pages"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.2.xsd">
+
+   <param name="firstResult" value="#{countryList.firstResult}"/>
+   <param name="sort" value="#{countryList.orderColumn}"/>
+   <param name="dir" value="#{countryList.orderDirection}"/>
+   <param name="logic" value="#{countryList.restrictionLogicOperator}"/>
+
+   <param name="from"/>
+   <param name="code" value="#{countryList.country.code}"/>
+   <param name="name" value="#{countryList.country.name}"/>
+   <param name="continent" value="#{countryList.country.continent}"/>
+   <param name="region" value="#{countryList.country.region}"/>
+   <param name="localName" value="#{countryList.country.localName}"/>
+   <param name="governmentForm" value="#{countryList.country.governmentForm}"/>
+   <param name="headOfState" value="#{countryList.country.headOfState}"/>
+   <param name="code2" value="#{countryList.country.code2}"/>
+
+</page>

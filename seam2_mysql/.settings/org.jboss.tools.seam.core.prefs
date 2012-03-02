@@ -1,0 +1,17 @@
+#Wed Feb 08 11:38:23 GMT 2012
+action.package=org.domain.seam2mysql.session
+action.sources=/seam2_mysql-ejb/ejbModule
+eclipse.preferences.version=1
+model.package=org.domain.seam2mysql.entity
+model.sources=/seam2_mysql-ejb/ejbModule
+seam.ear.project=seam2_mysql-ear
+seam.ejb.project=seam2_mysql-ejb
+seam.project.connection.profile=test@Caliban
+seam.project.deployment.type=ear
+seam.project.settings.version=1.1
+seam.project.web.root.folder=/seam2_mysql/WebContent
+seam.runtime.name=jboss-seam-2.2.2.Final
+seam.test.creating=false
+seam.test.project=seam2_mysql-test
+test.package=org.domain.seam2mysql.test
+test.sources=/seam2_mysql-test/test-src

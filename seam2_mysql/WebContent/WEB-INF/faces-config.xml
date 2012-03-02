@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+	<managed-bean>
+		<managed-bean-name>Utils</managed-bean-name>
+		<managed-bean-class>org.viewcontroler.managingbeans.Utils</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>skinBean</managed-bean-name>
+		<managed-bean-class>org.viewcontroler.managingbeans.SkinBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>skin</property-name>
+			<value>glassX</value>
+		</managed-property>
+	</managed-bean>
+	<application>
+		<view-handler>com.sun.facelets.FaceletViewHandler</view-handler>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>bg</supported-locale>
+			<supported-locale>de</supported-locale>
+			<supported-locale>en</supported-locale>
+			<supported-locale>fr</supported-locale>
+			<supported-locale>tr</supported-locale>
+		</locale-config>
+
+		<message-bundle>messages_pt</message-bundle>
+
+	</application>
+</faces-config>

@@ -1,0 +1,4 @@
+<classloading xmlns="urn:jboss:classloading:1.0" domain="seam2_mysql.ear"
+	parent-domain="seam2_mysql.ear" export-all="NON_EMPTY" import-all="true"
+	parent-first="true">
+</classloading>

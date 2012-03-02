@@ -1,0 +1,109 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="city" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{cityHome.managed ? 'Edit' : 'Add'} City</f:facet>
+
+
+
+            <s:decorate id="nameField" template="layout/edit.xhtml">
+                <ui:define name="label">Name</ui:define>
+                <h:inputText id="name"
+                       required="true"
+                           size="35"
+                      maxlength="35"
+                          value="#{cityHome.instance.name}">
+                    <a:support event="onblur" reRender="nameField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="countryCodeField" template="layout/edit.xhtml">
+                <ui:define name="label">Country code</ui:define>
+                <h:inputText id="countryCode"
+                       required="true"
+                           size="3"
+                      maxlength="3"
+                          value="#{cityHome.instance.countryCode}">
+                    <a:support event="onblur" reRender="countryCodeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="districtField" template="layout/edit.xhtml">
+                <ui:define name="label">District</ui:define>
+                <h:inputText id="district"
+                       required="true"
+                           size="25"
+                      maxlength="25"
+                          value="#{cityHome.instance.district}">
+                    <a:support event="onblur" reRender="districtField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="populationField" template="layout/edit.xhtml">
+                <ui:define name="label">Population</ui:define>
+                <h:inputText id="population"
+                       required="true"
+                          value="#{cityHome.instance.population}">
+                    <a:support event="onblur" reRender="populationField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{cityHome.persist}"
+                       disabled="#{!cityHome.wired}"
+                       rendered="#{!cityHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{cityHome.update}"
+                       rendered="#{cityHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{cityHome.remove}"
+                      immediate="true"
+                       rendered="#{cityHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/City.xhtml"
+                rendered="#{cityHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty cityFrom ? 'CityList' : cityFrom}.xhtml"
+                rendered="#{!cityHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

@@ -1,0 +1,53 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Countrylanguage Details</f:facet>
+
+        <s:decorate id="countryCode" template="layout/display.xhtml">
+            <ui:define name="label">Country code</ui:define>
+            <h:outputText value="#{countrylanguageHome.instance.id.countryCode}"/>
+        </s:decorate>
+        <s:decorate id="language" template="layout/display.xhtml">
+            <ui:define name="label">Language</ui:define>
+            <h:outputText value="#{countrylanguageHome.instance.id.language}"/>
+        </s:decorate>
+
+        <s:decorate id="isOfficial" template="layout/display.xhtml">
+            <ui:define name="label">Is official</ui:define>
+            <h:outputText value="#{countrylanguageHome.instance.isOfficial}"/>
+        </s:decorate>
+
+        <s:decorate id="percentage" template="layout/display.xhtml">
+            <ui:define name="label">Percentage</ui:define>
+            <h:outputText value="#{countrylanguageHome.instance.percentage}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/CountrylanguageEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty countrylanguageFrom ? 'CountrylanguageList' : countrylanguageFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

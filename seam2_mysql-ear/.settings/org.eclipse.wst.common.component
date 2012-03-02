@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+<wb-module deploy-name="seam2_mysql-ear">
+<wb-resource deploy-path="/" source-path="/EarContent"/>
+<dependent-module deploy-path="/" handle="module:/resource/seam2_mysql-ejb/seam2_mysql-ejb">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+<dependent-module deploy-path="/" handle="module:/resource/seam2_mysql/seam2_mysql">
+<dependency-type>uses</dependency-type>
+</dependent-module>
+</wb-module>
+</project-modules>

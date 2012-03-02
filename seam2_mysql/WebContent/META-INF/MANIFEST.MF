@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Class-Path: seam2_mysql-ejb.jar 
+ jboss-seam.jar 

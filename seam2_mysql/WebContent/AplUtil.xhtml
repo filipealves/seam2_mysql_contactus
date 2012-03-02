@@ -1,0 +1,94 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Apl util Details</f:facet>
+
+        <s:decorate id="utilizador" template="layout/display.xhtml">
+            <ui:define name="label">Utilizador</ui:define>
+            <h:outputText value="#{aplUtilHome.instance.utilizador}"/>
+        </s:decorate>
+
+        <s:decorate id="passwd" template="layout/display.xhtml">
+            <ui:define name="label">Passwd</ui:define>
+            <h:outputText value="#{aplUtilHome.instance.passwd}"/>
+        </s:decorate>
+
+        <s:decorate id="unidOrg" template="layout/display.xhtml">
+            <ui:define name="label">Unid org</ui:define>
+            <h:outputText value="#{aplUtilHome.instance.unidOrg}"/>
+        </s:decorate>
+
+        <s:decorate id="dataUltAlt" template="layout/display.xhtml">
+            <ui:define name="label">Data ult alt</ui:define>
+            <h:outputText value="#{aplUtilHome.instance.dataUltAlt}">
+                <s:convertDateTime type="both" dateStyle="short"/>
+            </h:outputText>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/AplUtilEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty aplUtilFrom ? 'AplUtilList' : aplUtilFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/manytoone.gif" style="vertical-align: middle; padding-right: 4px;"/>Apl perfil</h:panelGroup>
+        </f:facet>
+    <div class="association" id="aplPerfilParent">
+
+        <h:outputText value="There is no aplPerfil associated with this aplUtil."
+                   rendered="#{aplUtilHome.instance.aplPerfil == null}"/>
+
+        <rich:dataTable var="_aplPerfil"
+                   value="#{aplUtilHome.instance.aplPerfil}"
+                rendered="#{aplUtilHome.instance.aplPerfil != null}"
+              rowClasses="rvgRowOne,rvgRowTwo"
+                      id="aplPerfilTable">
+            <h:column>
+                <f:facet name="header">Cod perfil</f:facet>
+                <h:outputText value="#{_aplPerfil.codPerfil}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Desc perfil</f:facet>
+                <h:outputText value="#{_aplPerfil.descPerfil}"/>
+            </h:column>
+            <h:column styleClass="action">
+                <f:facet name="header">Action</f:facet>
+                <s:link id="viewaplPerfil"
+                     value="View"
+                      view="/AplPerfil.xhtml">
+                    <f:param name="aplPerfilCodPerfil"
+                           value="#{_aplPerfil.codPerfil}"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

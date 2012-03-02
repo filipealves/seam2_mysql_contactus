@@ -1,0 +1,80 @@
+<rich:toolBar xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich">
+	<rich:toolBarGroup>
+		<h:outputText value="#{projectName}:" />
+		<s:link id="menuHomeId" view="/home.xhtml" value="Home"
+			propagation="none" />
+	</rich:toolBarGroup>
+
+
+	<rich:dropDownMenu showDelay="250" hideDelay="0" submitMode="none">
+		<f:facet name="label">Menu</f:facet><rich:menuItem>
+			<s:link view="/AplUtilList.xhtml" value="Utilizadores(Exemplos Concorrencia, Lovs)" id="AplUtilId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/AplPerfilList.xhtml" value="Perfis"
+				id="AplPerfilId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+		
+		
+		<rich:menuItem>
+			<s:link view="/CountryList.xhtml"
+				value="Paises(Exemplos Excel e Delete)" id="CountryId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+
+
+		<rich:menuItem>
+			<s:link view="/CountrylanguageList.xhtml" value="Linguagens" id="Linguagens" includePageParams="false" propagation="none" />
+		</rich:menuItem><rich:menuItem>
+			<s:link view="/CityList.xhtml"
+				value="Cidades(Pagina Protegida a role administracao)" id="CityId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/UserList.xhtml" value="User List(Exemplo Seguranca)"
+				id="UserId" includePageParams="false" propagation="none" />
+		</rich:menuItem>
+		<rich:menuItem>
+			<s:link view="/RoleList.xhtml" value="Role List" id="RoleId"
+				includePageParams="false" propagation="none" />
+		</rich:menuItem>
+	</rich:dropDownMenu>
+
+	<!-- @newMenuItem@ -->
+	<rich:toolBarGroup location="right">
+
+		<h:form>
+			<h:outputText value="Escolha um tema: ">
+			</h:outputText>
+			<h:selectOneMenu id="select" value="#{skinBean.skin}"
+				onchange="submit()">
+				<f:selectItem itemLabel="plain" itemValue="plain" />
+				<f:selectItem itemLabel="emeraldTown" itemValue="emeraldTown" />
+				<f:selectItem itemLabel="blueSky" itemValue="blueSky" />
+				<f:selectItem itemLabel="wine" itemValue="wine" />
+				<f:selectItem itemLabel="japanCherry" itemValue="japanCherry" />
+				<f:selectItem itemLabel="ruby" itemValue="ruby" />
+				<f:selectItem itemLabel="classic" itemValue="classic" />
+				<f:selectItem itemLabel="laguna" itemValue="laguna" />
+				<f:selectItem itemLabel="deepMarine" itemValue="deepMarine" />
+				<f:selectItem itemLabel="glassX" itemValue="glassX" />
+				<f:selectItem itemLabel="darkX" itemValue="darkX" />
+				<f:selectItem itemLabel="laguna" itemValue="laguna" />
+			</h:selectOneMenu>
+		</h:form>
+		<h:outputText id="menuWelcomeId"
+			value="Ligado como: #{credentials.username}"
+			rendered="#{identity.loggedIn}" />
+		<s:link id="menuLoginId" view="/login.xhtml" value="Login"
+			rendered="#{not identity.loggedIn}" propagation="none" />
+		<s:link id="menuLogoutId" view="/home.xhtml"
+			action="#{identity.logout}" value="Logout"
+			rendered="#{identity.loggedIn}" propagation="none" />
+	</rich:toolBarGroup>
+</rich:toolBar>

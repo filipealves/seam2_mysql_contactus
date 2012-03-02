@@ -1,0 +1,231 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="country" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{countryHome.managed ? 'Edit' : 'Add'} Country</f:facet>
+
+
+            <s:decorate id="codeField" template="layout/edit.xhtml">
+                <ui:define name="label">Code</ui:define>
+                <h:inputText id="code"
+                       disabled="#{countryHome.managed}"
+                       required="true"
+                           size="3"
+                      maxlength="3"
+                          value="#{countryHome.instance.code}">
+                    <a:support event="onblur" reRender="codeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="nameField" template="layout/edit.xhtml">
+                <ui:define name="label">Name</ui:define>
+                <h:inputText id="name"
+                       required="true"
+                           size="52"
+                      maxlength="52"
+                          value="#{countryHome.instance.name}">
+                    <a:support event="onblur" reRender="nameField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="continentField" template="layout/edit.xhtml">
+                <ui:define name="label">Continent</ui:define>
+                <h:inputText id="continent"
+                       required="true"
+                           size="13"
+                      maxlength="13"
+                          value="#{countryHome.instance.continent}">
+                    <a:support event="onblur" reRender="continentField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="regionField" template="layout/edit.xhtml">
+                <ui:define name="label">Region</ui:define>
+                <h:inputText id="region"
+                       required="true"
+                           size="26"
+                      maxlength="26"
+                          value="#{countryHome.instance.region}">
+                    <a:support event="onblur" reRender="regionField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="surfaceAreaField" template="layout/edit.xhtml">
+                <ui:define name="label">Surface area</ui:define>
+                <h:inputText id="surfaceArea"
+                       required="true"
+                          value="#{countryHome.instance.surfaceArea}">
+                    <a:support event="onblur" reRender="surfaceAreaField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="indepYearField" template="layout/edit.xhtml">
+                <ui:define name="label">Indep year</ui:define>
+                <h:inputText id="indepYear"
+                          value="#{countryHome.instance.indepYear}">
+                    <a:support event="onblur" reRender="indepYearField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="populationField" template="layout/edit.xhtml">
+                <ui:define name="label">Population</ui:define>
+                <h:inputText id="population"
+                       required="true"
+                          value="#{countryHome.instance.population}">
+                    <a:support event="onblur" reRender="populationField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="lifeExpectancyField" template="layout/edit.xhtml">
+                <ui:define name="label">Life expectancy</ui:define>
+                <h:inputText id="lifeExpectancy"
+                          value="#{countryHome.instance.lifeExpectancy}">
+                    <a:support event="onblur" reRender="lifeExpectancyField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="gnpField" template="layout/edit.xhtml">
+                <ui:define name="label">Gnp</ui:define>
+                <h:inputText id="gnp"
+                          value="#{countryHome.instance.gnp}">
+                    <a:support event="onblur" reRender="gnpField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="gnpoldField" template="layout/edit.xhtml">
+                <ui:define name="label">Gnpold</ui:define>
+                <h:inputText id="gnpold"
+                          value="#{countryHome.instance.gnpold}">
+                    <a:support event="onblur" reRender="gnpoldField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="localNameField" template="layout/edit.xhtml">
+                <ui:define name="label">Local name</ui:define>
+                <h:inputText id="localName"
+                       required="true"
+                           size="45"
+                      maxlength="45"
+                          value="#{countryHome.instance.localName}">
+                    <a:support event="onblur" reRender="localNameField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="governmentFormField" template="layout/edit.xhtml">
+                <ui:define name="label">Government form</ui:define>
+                <h:inputText id="governmentForm"
+                       required="true"
+                           size="45"
+                      maxlength="45"
+                          value="#{countryHome.instance.governmentForm}">
+                    <a:support event="onblur" reRender="governmentFormField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="headOfStateField" template="layout/edit.xhtml">
+                <ui:define name="label">Head of state</ui:define>
+                <h:inputText id="headOfState"
+                           size="60"
+                      maxlength="60"
+                          value="#{countryHome.instance.headOfState}">
+                    <a:support event="onblur" reRender="headOfStateField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="capitalField" template="layout/edit.xhtml">
+                <ui:define name="label">Capital</ui:define>
+                <h:inputText id="capital"
+                          value="#{countryHome.instance.capital}">
+                    <a:support event="onblur" reRender="capitalField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="code2Field" template="layout/edit.xhtml">
+                <ui:define name="label">Code2</ui:define>
+                <h:inputText id="code2"
+                       required="true"
+                           size="2"
+                      maxlength="2"
+                          value="#{countryHome.instance.code2}">
+                    <a:support event="onblur" reRender="code2Field" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="selectedField" template="layout/edit.xhtml">
+                <ui:define name="label">Selected</ui:define>
+                <h:selectBooleanCheckbox id="selected"
+                                   required="true"
+                                      value="#{countryHome.instance.selected}"/>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{countryHome.persist}"
+                       disabled="#{!countryHome.wired}"
+                       rendered="#{!countryHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{countryHome.update}"
+                       rendered="#{countryHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{countryHome.remove}"
+                      immediate="true"
+                       rendered="#{countryHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Country.xhtml"
+                rendered="#{countryHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty countryFrom ? 'CountryList' : countryFrom}.xhtml"
+                rendered="#{!countryHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

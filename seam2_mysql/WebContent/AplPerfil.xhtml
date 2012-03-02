@@ -1,0 +1,103 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">Apl perfil Details</f:facet>
+
+        <s:decorate id="codPerfil" template="layout/display.xhtml">
+            <ui:define name="label">Cod perfil</ui:define>
+            <h:outputText value="#{aplPerfilHome.instance.codPerfil}"/>
+        </s:decorate>
+
+        <s:decorate id="descPerfil" template="layout/display.xhtml">
+            <ui:define name="label">Desc perfil</ui:define>
+            <h:outputText value="#{aplPerfilHome.instance.descPerfil}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/AplPerfilEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty aplPerfilFrom ? 'AplPerfilList' : aplPerfilFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+    <rich:tabPanel switchType="ajax">
+
+    <rich:tab>
+        <f:facet name="label">
+            <h:panelGroup><h:graphicImage value="/img/onetomany.gif" style="vertical-align: middle; padding-right: 4px;"/>Apl utils</h:panelGroup>
+        </f:facet>
+    <h:form styleClass="association" id="aplUtilsChildren">
+
+        <h:outputText value="There are no aplUtils associated with this aplPerfil."
+                   rendered="#{empty aplPerfilHome.aplUtils}"/>
+
+        <rich:dataTable value="#{aplPerfilHome.aplUtils}"
+                       var="_aplUtil"
+                  rendered="#{not empty aplPerfilHome.aplUtils}"
+                rowClasses="rvgRowOne,rvgRowTwo"
+                        id="aplUtilsTable">
+            <rich:column sortBy="#{_aplUtil.utilizador}">
+                <f:facet name="header">Utilizador</f:facet>
+                <h:outputText value="#{_aplUtil.utilizador}"/>
+            </rich:column>
+            <rich:column sortBy="#{_aplUtil.passwd}">
+                <f:facet name="header">Passwd</f:facet>
+                <h:outputText value="#{_aplUtil.passwd}"/>
+            </rich:column>
+            <rich:column sortBy="#{_aplUtil.unidOrg}">
+                <f:facet name="header">Unid org</f:facet>
+                <h:outputText value="#{_aplUtil.unidOrg}"/>
+            </rich:column>
+            <rich:column sortBy="#{_aplUtil.dataUltAlt}">
+                <f:facet name="header">Data ult alt</f:facet>
+                <h:outputText value="#{_aplUtil.dataUltAlt}">
+                    <s:convertDateTime type="both" dateStyle="short"/>
+                </h:outputText>
+            </rich:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <s:link id="selectaplUtil"
+                     value="Select"
+                      view="/AplUtil.xhtml">
+                    <f:param name="aplUtilUtilizador"
+                            value="#{_aplUtil.utilizador}"/>
+                    <f:param name="aplUtilFrom" value="AplPerfil"/>
+                </s:link>
+            </h:column>
+        </rich:dataTable>
+
+    </h:form>
+
+    <div class="actionButtons">
+        <s:button
+               value="Add aplUtil"
+                view="/AplUtilEdit.xhtml">
+            <f:param name="aplPerfilCodPerfil"
+                    value="#{aplPerfilHome.instance.codPerfil}"/>
+            <f:param name="aplUtilFrom" value="AplPerfil"/>
+        </s:button>
+    </div>
+    </rich:tab>
+</rich:tabPanel>
+</ui:define>
+
+</ui:composition>

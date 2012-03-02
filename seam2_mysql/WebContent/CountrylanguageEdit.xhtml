@@ -1,0 +1,109 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <h:form id="countrylanguage" styleClass="edit">
+
+        <rich:panel>
+            <f:facet name="header">#{countrylanguageHome.managed ? 'Edit' : 'Add'} Countrylanguage</f:facet>
+
+
+            <s:decorate id="countryCodeField" template="layout/edit.xhtml">
+                <ui:define name="label">Country code</ui:define>
+                <h:inputText id="countryCode"
+                       disabled="#{countrylanguageHome.managed}"
+                      required="true"
+                          size="3"
+                     maxlength="3"
+                         value="#{countrylanguageHome.instance.id.countryCode}">
+                    <a:support event="onblur" reRender="countryCodeField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <s:decorate id="languageField" template="layout/edit.xhtml">
+                <ui:define name="label">Language</ui:define>
+                <h:inputText id="language"
+                       disabled="#{countrylanguageHome.managed}"
+                      required="true"
+                          size="30"
+                     maxlength="30"
+                         value="#{countrylanguageHome.instance.id.language}">
+                    <a:support event="onblur" reRender="languageField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="isOfficialField" template="layout/edit.xhtml">
+                <ui:define name="label">Is official</ui:define>
+                <h:inputText id="isOfficial"
+                       required="true"
+                           size="2"
+                      maxlength="2"
+                          value="#{countrylanguageHome.instance.isOfficial}">
+                    <a:support event="onblur" reRender="isOfficialField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+
+            <s:decorate id="percentageField" template="layout/edit.xhtml">
+                <ui:define name="label">Percentage</ui:define>
+                <h:inputText id="percentage"
+                       required="true"
+                          value="#{countrylanguageHome.instance.percentage}">
+                    <a:support event="onblur" reRender="percentageField" bypassUpdates="true" ajaxSingle="true"/>
+                </h:inputText>
+            </s:decorate>
+
+            <div style="clear:both">
+                <span class="required">*</span>
+                required fields
+            </div>
+
+        </rich:panel>
+
+        <div class="actionButtons">
+
+            <h:commandButton id="save"
+                          value="Save"
+                         action="#{countrylanguageHome.persist}"
+                       disabled="#{!countrylanguageHome.wired}"
+                       rendered="#{!countrylanguageHome.managed}"/>
+
+            <h:commandButton id="update"
+                          value="Save"
+                         action="#{countrylanguageHome.update}"
+                       rendered="#{countrylanguageHome.managed}"/>
+
+            <h:commandButton id="delete"
+                          value="Delete"
+                         action="#{countrylanguageHome.remove}"
+                      immediate="true"
+                       rendered="#{countrylanguageHome.managed}"/>
+
+            <s:button id="cancelEdit"
+                   value="Cancel"
+             propagation="end"
+                    view="/Countrylanguage.xhtml"
+                rendered="#{countrylanguageHome.managed}"/>
+
+            <s:button id="cancelAdd"
+                   value="Cancel"
+             propagation="end"
+                    view="/#{empty countrylanguageFrom ? 'CountrylanguageList' : countrylanguageFrom}.xhtml"
+                rendered="#{!countrylanguageHome.managed}"/>
+
+        </div>
+    </h:form>
+
+</ui:define>
+
+</ui:composition>

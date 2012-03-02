@@ -1,0 +1,155 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich" template="layout/template.xhtml">
+
+	<ui:define name="body">
+
+		<h:form id="aplUtil" styleClass="edit">
+
+			<rich:panel>
+				<f:facet name="header">#{aplUtilHome.managed ? 'Edit' : 'Add'} Apl util</f:facet>
+
+
+				<s:decorate id="utilizadorField" template="layout/edit.xhtml">
+					<ui:define name="label">Utilizador</ui:define>
+					<h:inputText id="utilizador" disabled="#{aplUtilHome.managed}"
+						required="true" size="100" maxlength="100"
+						value="#{aplUtilHome.instance.utilizador}">
+						<a:support event="onblur" reRender="utilizadorField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+
+				<s:decorate id="passwdField" template="layout/edit.xhtml">
+					<ui:define name="label">Passwd</ui:define>
+					<h:inputText id="passwd" size="45" maxlength="45"
+						value="#{aplUtilHome.instance.passwd}">
+						<a:support event="onblur" reRender="passwdField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+
+				<s:decorate id="unidOrgField" template="layout/edit.xhtml">
+					<ui:define name="label">Unid org</ui:define>
+					<h:inputText id="unidOrg" size="45" maxlength="45"
+						value="#{aplUtilHome.instance.unidOrg}">
+						<a:support event="onblur" reRender="unidOrgField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:inputText>
+				</s:decorate>
+
+				<s:decorate id="codPerfilField" template="layout/edit.xhtml">
+					<ui:define name="label">Cod Perfil Poplist</ui:define>
+
+					<h:selectOneMenu value="#{aplUtilHome.instance.aplPerfil}"
+						required="true">
+						<s:selectItems value="#{aplPerfilList.resultList}" var="perfil"
+							label="#{perfil.descPerfil}" noSelectionLabel="Please Select..." />
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate id="codPerfilLovField" template="layout/edit.xhtml">
+					<ui:define name="label">Cod Perfil LOV</ui:define>
+
+					<div class="actionButtons">
+						<s:button
+							id="#{aplUtilHome.instance.aplPerfil != null ? 'changeParent' : 'selectParent'}"
+							value="#{aplUtilHome.instance.aplPerfil != null ? 'Change' : 'Select'} aplPerfil"
+							view="/AplPerfilList.xhtml">
+							<f:param name="from" value="AplUtilEdit" />
+						</s:button>
+					</div>
+					<h:outputText value="Por favor seleccione um valor da Lista."
+						rendered="#{aplUtilHome.instance.aplPerfil == null}" />
+					<h:outputText id="codPerfilLov1" size="45" maxlength="45"
+						value="#{aplUtilHome.instance.aplPerfil.codPerfil}">
+						<a:support event="onblur" reRender="codPerfilLovField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:outputText>
+
+					<h:outputText id="codPerfilLov2" size="45" maxlength="45"
+						value="#{aplUtilHome.instance.aplPerfil.descPerfil}">
+						<a:support event="onblur" reRender="codPerfilLovField"
+							bypassUpdates="true" ajaxSingle="true" />
+					</h:outputText>
+
+
+
+				</s:decorate>
+
+				<div style="clear: both">
+					<span class="required">*</span> required fields
+				</div>
+
+			</rich:panel>
+
+			<div class="actionButtons">
+
+				<h:commandButton id="save" value="Save"
+					action="#{aplUtilHome.persist}" disabled="#{!aplUtilHome.wired}"
+					rendered="#{!aplUtilHome.managed}" />
+
+				<h:commandButton id="update" value="Save"
+					action="#{aplUtilHome.update}" rendered="#{aplUtilHome.managed}" />
+
+				<h:commandButton id="delete" value="Delete"
+					action="#{aplUtilHome.remove}" immediate="true"
+					rendered="#{aplUtilHome.managed}" />
+
+				<s:button id="cancelEdit" value="Cancel" propagation="end"
+					view="/AplUtil.xhtml" rendered="#{aplUtilHome.managed}" />
+
+				<s:button id="cancelAdd" value="Cancel" propagation="end"
+					view="/#{empty aplUtilFrom ? 'AplUtilList' : aplUtilFrom}.xhtml"
+					rendered="#{!aplUtilHome.managed}" />
+
+			</div>
+		</h:form>
+
+		<!-- <rich:tabPanel switchType="ajax">
+
+			<rich:tab label="Apl perfil *" labelClass="required">
+				<div class="association" id="aplPerfilParent">
+
+					<h:outputText value="Por favor seleccione um valor da Lista."
+						rendered="#{aplUtilHome.instance.aplPerfil == null}" />
+
+					<rich:dataTable var="_aplPerfil"
+						value="#{aplUtilHome.instance.aplPerfil}"
+						rendered="#{aplUtilHome.instance.aplPerfil != null}"
+						rowClasses="rvgRowOne,rvgRowTwo" id="aplPerfilTable">
+						<h:column>
+							<f:facet name="header">Cod perfil</f:facet>
+							<h:outputText value="#{_aplPerfil.codPerfil}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Desc perfil</f:facet>
+							<h:outputText value="#{_aplPerfil.descPerfil}" />
+						</h:column>
+					</rich:dataTable>
+
+					<div class="actionButtons">
+						<s:button
+							id="#{aplUtilHome.instance.aplPerfil != null ? 'changeParent' : 'selectParent'}"
+							value="#{aplUtilHome.instance.aplPerfil != null ? 'Change' : 'Select'} aplPerfil"
+							view="/AplPerfilList.xhtml">
+							<f:param name="from" value="AplUtilEdit" />
+						</s:button>
+					</div>
+
+				</div>
+			</rich:tab>
+		</rich:tabPanel> -->
+	</ui:define>
+
+</ui:composition>

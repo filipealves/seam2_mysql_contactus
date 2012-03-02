@@ -1,0 +1,55 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:s="http://jboss.com/products/seam/taglib"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="layout/template.xhtml">
+
+<ui:define name="body">
+
+    <rich:panel>
+        <f:facet name="header">City Details</f:facet>
+
+
+        <s:decorate id="name" template="layout/display.xhtml">
+            <ui:define name="label">Name</ui:define>
+            <h:outputText value="#{cityHome.instance.name}"/>
+        </s:decorate>
+
+        <s:decorate id="countryCode" template="layout/display.xhtml">
+            <ui:define name="label">Country code</ui:define>
+            <h:outputText value="#{cityHome.instance.countryCode}"/>
+        </s:decorate>
+
+        <s:decorate id="district" template="layout/display.xhtml">
+            <ui:define name="label">District</ui:define>
+            <h:outputText value="#{cityHome.instance.district}"/>
+        </s:decorate>
+
+        <s:decorate id="population" template="layout/display.xhtml">
+            <ui:define name="label">Population</ui:define>
+            <h:outputText value="#{cityHome.instance.population}"/>
+        </s:decorate>
+
+        <div style="clear:both"/>
+
+    </rich:panel>
+
+    <div class="actionButtons">
+
+        <s:button view="/CityEdit.xhtml"
+                    id="edit"
+                 value="Edit"/>
+
+        <s:button view="/#{empty cityFrom ? 'CityList' : cityFrom}.xhtml"
+                    id="done"
+                 value="Done"/>
+
+    </div>
+
+</ui:define>
+
+</ui:composition>

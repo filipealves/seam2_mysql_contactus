@@ -1,0 +1,4 @@
+#Wed Feb 08 11:38:22 GMT 2012
+default.configuration=seam2_mysql-ejb
+eclipse.preferences.version=1
+hibernate3.enabled=true
